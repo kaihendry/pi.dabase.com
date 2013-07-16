@@ -1,0 +1,9 @@
+[Unit]
+Description=Remote port forward
+After=network.target
+
+[Service]
+ExecStart=/root/ssh-loop.sh
+
+[Install]
+WantedBy=multi-user.target
