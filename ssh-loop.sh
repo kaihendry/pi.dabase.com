@@ -3,7 +3,7 @@
 test "$port_min" || port_min="10000" 
 test "$port_max" || port_max="15000"
 test "$server"   || server="pi.dabase.com"
-test "$ssh_opts" || ssh_opts="-l pi -t -t -o BatchMode=yes -o ExitOnForwardFailure=yes" 
+test "$ssh_opts" || ssh_opts="-l pi -t -t -o BatchMode=yes -o ExitOnForwardFailure=yes -o ConnectTimeout=30 -o ServerAliveInterval=180 -o ServerAliveCountMax=3" 
 test "$ssh_port" || ssh_port="22"
 test "$ssh_host" || ssh_host="127.0.0.1"
 

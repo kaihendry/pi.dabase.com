@@ -8,13 +8,7 @@ Content-Type: text/html
 <head>
 <meta charset="utf-8" />
 <title>Singapore Rasbperry PIs</title>
-<style>
-	BODY { margin: 10pt; font: 15px/1.25 "Helvetica Neue", sans-serif; }
-	p,h1,pre { color: #000; text-shadow: 1px 0 0 #fff, 0 -1px 0 #fff, 0 1px 0 #fff, -1px 0 0 #fff; }
-	IMG { clear: both; margin-bottom: 5px; }
-	PRE { margin: 20pt; }
-	DIV { margin: 20pt; }
-</style>
+<link href=http://archpi.dabase.com/style.css rel=stylesheet>
 </head>
 <body>
 
@@ -29,21 +23,19 @@ Content-Type: text/html
 
 <p>Running <code>ssh-loop-sh</code> effectively "phones home" and allows you to connect to it, no matter how it's deployed.</p>
 <pre>
-KEY			PORT	MAC			LOCAL IP	ORIGIN IP	OPORT	HOST		HPORT
+KEY	PORT	MAC			LOCAL IP	ORIGIN IP	OPORT	HOST		HPORT
 END
 
-for i in d/*
-do
-	{ echo -n "$(basename $i) "; cat $i; } | tr ' ' '\t'
-done
+./info.sh
 
 cat <<END
 </pre>
 
 <h3>Connecting to your PI</h3>
-<code>
+<pre>
+port=curl -s http://pi.dabase.com/\$machine/ | tail -n1 | awk '{print \$3}'
 ssh pi.dabase.com -p \$port # -o "StrictHostKeyChecking no" -o UserKnownHostsFile=/dev/null
-</code>
+</pre>
 
 <h3>Setup</h3>
 
@@ -64,14 +56,14 @@ exit 0
 <h3>How the server works</h3>
 
 <pre><code>$ cat /home/pi/.ssh/authorized_keys
-command="/home/pi/pilog hendry" ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDTK9CFLI4uRI+n5n74WJpvLyS3PdYmgqTDUP/BPRVB9IN8Xt9NZcA5S5/L6VFXujo29rBlLBr4m2jdZoCXKOfoC5VEUEAmX++vDXG42jkzUPLsiMhjJtEgN+YVt3LEkH1REUCDo/AL3SxLVRNvPRHEBLdOyhxmQQrBbosi8rEyjXUsYBY2rhR8RFPcPGpG2NCEjH0gJoLpYIII+BhRRXObCphuhW9QWAzIp7OvxqPjOHDq4HVotcbTWC90ha+n/ZFZ5LOipQG0yQ8Jo5dxbYUZl1iJhKYP2OyTs+3UeIcRnpHvS2Z1+mbzjxpdIVP3sm2HVfXgj+53i7ZtOoQEsNix root@pihsg
+END
+cat /home/pi/.ssh/authorized_keys
+cat <<END
 
 $ cat /home/pi/pilog
-#!/bin/bash
-pi=/srv/www/pi.dabase.com/d/\$1-\$(date +%s)
-trap "rm -f \$pi" EXIT
-echo \$SSH_ORIGINAL_COMMAND \$SSH_CONNECTION &gt; \$pi
-cat &gt; /dev/null
+END
+cat /home/pi/pilog
+cat <<END
 </code></pre>
 
 <p>Tweaks to /etc/ssh/sshd_config to make it work:</p>
