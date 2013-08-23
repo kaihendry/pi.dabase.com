@@ -17,13 +17,14 @@ Content-Type: text/html
 <h2>Why?</h2>
 
 <ul>
-<li>If you have trouble figuring out your IP address of your device</li>
-<li>Do not have access to the port forwarding UI of your router</li>
+<li>Test you PI is online</li>
+<li>Find the IP address of your PI</li>
+<li>SSH back to your PI without needing to adjust the forwarding UI of your router</li>
 </ul>
 
 <p>Running <code>ssh-loop-sh</code> effectively "phones home" and allows you to connect to it, no matter how it's deployed.</p>
 <pre>
-KEY	PORT	MAC			LOCAL IP	ORIGIN IP	OPORT	HOST		HPORT
+NAME	PORT	MAC			LOCAL IP	ORIGIN IP	OPORT	HOST		HPORT		Notes
 END
 
 ./info.sh
@@ -33,8 +34,8 @@ cat <<END
 
 <h3>Connecting to your PI</h3>
 <pre>
-port=curl -s http://pi.dabase.com/\$machine/ | tail -n1 | awk '{print \$3}'
-ssh pi.dabase.com -p \$port # -o "StrictHostKeyChecking no" -o UserKnownHostsFile=/dev/null
+port=\$(curl -s http://pi.dabase.com/\$NAME/ | tail -n1 | awk '{print \$3}')
+test "\$port" && ssh pi.dabase.com -p \$port # -o "StrictHostKeyChecking no" -o UserKnownHostsFile=/dev/null
 </pre>
 
 <h3>Setup</h3>
