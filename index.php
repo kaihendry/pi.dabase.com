@@ -1,14 +1,14 @@
-#!/bin/sh
-cat <<END
-Cache-Control: no-cache
-Content-Type: text/html
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" />
-<title>Singapore Rasbperry PIs</title>
+<title>Singapore Raspberry PIs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href=http://archpi.dabase.com/style.css rel=stylesheet>
+<style>
+th { text-align:left; outline:1px solid tan; }
+td { background-color: #D1D6E7; }
+</style>
 </head>
 <body>
 
@@ -23,14 +23,12 @@ Content-Type: text/html
 </ul>
 
 <p>Running <code>ssh-loop-sh</code> effectively "phones home" and allows you to connect to it, no matter how it's deployed.</p>
-<pre>
-NAME	PORT	MAC			LOCAL IP	ORIGIN IP	OPORT	HOST		HPORT		Notes
-END
 
-./info.sh
+<?php
+passthru("./newinfo.sh");
+?>
 
-cat <<END
-</pre>
+<p><strong>Note:</strong> Please <a href=ssh-auth-types.cgi>do not allow password logins</a> by adding <tt>PasswordAuthentication no</tt> to your <tt>/etc/ssh/sshd_config</tt>.</p>
 
 <h3>Connecting to your PI</h3>
 <pre>
@@ -43,6 +41,8 @@ test "\$port" && ssh pi.dabase.com -p \$port # -o "StrictHostKeyChecking no" -o 
 <p>ssh-keygen without a password.</p>
 
 <p>Send hendry@iki.fi your public key /root/.ssh/id_rsa.pub. Once he's added your key, run <a href=ssh-loop.sh>ssh-loop.sh</a>.</p>
+
+<p>Make sure you have <strong>chmod +x /root/ssh-loop.sh</strong>, else you will see a systemd error like: <code>main process exited, code=exited, status=203/EXEC</code>.</p>
 
 <p>To keep it running add to /etc/rc.local like so:</p>
 
@@ -57,14 +57,10 @@ exit 0
 <h3>How the server works</h3>
 
 <pre><code>$ cat /home/pi/.ssh/authorized_keys
-END
-cat /home/pi/.ssh/authorized_keys
-cat <<END
+<?php passthru("cat /home/pi/.ssh/authorized_keys"); ?>
 
 $ cat /home/pi/pilog
-END
-cat /home/pi/pilog
-cat <<END
+<?php passthru("cat /home/pi/pilog"); ?>
 </code></pre>
 
 <p>Tweaks to /etc/ssh/sshd_config to make it work:</p>
@@ -79,4 +75,3 @@ ClientAliveInterval 10
 
 </body>
 </html>
-END
