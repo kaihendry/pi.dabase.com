@@ -4,10 +4,11 @@
 <meta charset="utf-8" />
 <title>Singapore Raspberry PIs</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel=icon href=sg-rpi.png type="image/png">
 <link href=http://archpi.dabase.com/style.css rel=stylesheet>
 <style>
 th { text-align:left; outline:1px solid tan; }
-td { background-color: #D1D6E7; }
+td { background-color: #D1D6E7; white-space: nowrap; }
 </style>
 </head>
 <body>
@@ -17,9 +18,9 @@ td { background-color: #D1D6E7; }
 <h2>Why?</h2>
 
 <ul>
-<li>Test you PI is online</li>
+<li>Test your PI is online</li>
 <li>Find the IP address of your PI</li>
-<li>SSH back to your PI without needing to adjust the forwarding UI of your router</li>
+<li>SSH back to your PI without needing to adjust the port forwarding UI of your router</li>
 </ul>
 
 <p>Running <code>ssh-loop-sh</code> effectively "phones home" and allows you to connect to it, no matter how it's deployed.</p>
@@ -28,7 +29,7 @@ td { background-color: #D1D6E7; }
 passthru("./newinfo.sh");
 ?>
 
-<p><strong>Note:</strong> Please <a href=ssh-auth-types.cgi>do not allow password logins</a> by adding <tt>PasswordAuthentication no</tt> to your <tt>/etc/ssh/sshd_config</tt>.</p>
+<p><strong>Note:</strong> Please <a href=ssh-auth-types.cgi>do not allow password logins</a> by adding <code>PasswordAuthentication no</code> to your <code>/etc/ssh/sshd_config</code>.</p>
 
 <h3>Connecting to your PI</h3>
 <pre>

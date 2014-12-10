@@ -23,9 +23,9 @@ do
 	set -- $(tail -n1 $i)
 	if test $1 == 0
 	then
-		echo "<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td nowrap>offline since $(date --date="@$2")</td>"
+		echo "<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>offline since $(date --date="@$2")</td>"
 	else
-		echo "<td>$3</td><td>$4</td><td>$5</td><td>$6</td><td>$7</td><td>$8</td><td>$9</td><td nowrap>online since $(date --date="@$2")</td>"
+		echo "<td>$3</td><td>$4</td><td>$5</td><td>$6</td><td>$7</td><td>$8</td><td>$9</td><td>online since $(date --date="@$2")</td>"
 	fi
 	echo "</tr>"
 done
