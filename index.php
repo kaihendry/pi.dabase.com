@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>Singapore Raspberry PIs</title>
+<title>Internet of Singapore Raspberry PIs</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel=icon href=sg-rpi.png type="image/png">
 <link href=http://archpi.dabase.com/style.css rel=stylesheet>
@@ -21,6 +21,7 @@ td { background-color: #D1D6E7; white-space: nowrap; }
 <li>Test your PI is online</li>
 <li>Find the IP address of your PI</li>
 <li>SSH back to your PI without needing to adjust the port forwarding UI of your router</li>
+<li><abbr title="Internet of Things">IoT</abbr> !!</li>
 </ul>
 
 <p>Running <code>ssh-loop-sh</code> effectively "phones home" and allows you to connect to it, no matter how it's deployed.</p>
@@ -39,9 +40,9 @@ test "\$port" && ssh pi.dabase.com -p \$port # -o "StrictHostKeyChecking no" -o 
 
 <h3>Setup</h3>
 
-<p>ssh-keygen without a password.</p>
+<p><code>ssh-keygen</code> without a password.</p>
 
-<p>Send hendry@iki.fi your public key /root/.ssh/id_rsa.pub. Once he's added your key, run <a href=ssh-loop.sh>ssh-loop.sh</a>.</p>
+<p>Send hendry+pi@iki.fi your public key /root/.ssh/id_rsa.pub. Once he's added your key, run <a href=ssh-loop.sh>ssh-loop.sh</a>.</p>
 
 <p>Make sure you have <strong>chmod +x /root/ssh-loop.sh</strong>, else you will see a systemd error like: <code>main process exited, code=exited, status=203/EXEC</code>.</p>
 

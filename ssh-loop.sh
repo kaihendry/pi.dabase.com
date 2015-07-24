@@ -12,7 +12,7 @@ ip route get 8.8.8.8 2>/dev/null|grep -Eo 'src [0-9.]+'|grep -Eo '[0-9.]+'
 }
 
 mac_address() {
-for i in /sys/class/net/*/address; do cat $i; return; done
+cat /sys/class/net/$(ip route get 8.8.8.8 2>/dev/null| awk '{print $5}')/address
 }
 
 port=$port_min
